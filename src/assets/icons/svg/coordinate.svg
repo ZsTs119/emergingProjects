@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>组 384</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="16" height="16" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M6.5,10 C2.91,10 0,11.34 0,13 C0,14.66 2.91,16 6.5,16 C10.09,16 13,14.66 13,13 C13,11.34 10.09,10 6.5,10 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13" height="6" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="组织生活" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="组织生活备份" transform="translate(-28.000000, -339.000000)">
+            <g id="编组-5" transform="translate(16.000000, 255.000000)">
+                <g id="组-384" transform="translate(12.000000, 84.000000)">
+                    <rect id="路径" x="0" y="0" width="16" height="16"></rect>
+                    <use id="矩形-100" stroke="#707070" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" opacity="0" stroke-dasharray="0,0" xlink:href="#path-1"></use>
+                    <g id="组-383" transform="translate(1.500418, 0.000000)">
+                        <rect id="路径" x="0" y="0" width="13" height="16"></rect>
+                        <use id="路径" stroke="#FF5757" mask="url(#mask-4)" stroke-width="2" stroke-dasharray="0,0" xlink:href="#path-3"></use>
+                        <path d="M6.49584435,4.61880045e-05 C8.98584435,4.61880045e-05 10.9958444,2.16004619 10.9958444,4.82004619 C10.9958444,6.60004619 9.49584435,9.66004619 6.49584435,14.0000462 C3.49584435,9.66004619 1.99584435,6.60004619 1.99584435,4.82004619 C1.99584435,2.16004619 4.00584435,4.61880045e-05 6.49584435,4.61880045e-05 Z M6.55647967,2.64865112 C5.40647967,2.64865112 4.46647967,3.64865112 4.46647967,4.88865112 C4.46647967,6.12865112 5.40647967,7.12865112 6.55647967,7.12865112 C7.70647967,7.12865112 8.64647967,6.12865112 8.64647967,4.88865112 C8.64647967,3.64865112 7.70647967,2.64865112 6.55647967,2.64865112 Z" id="减去-1" fill="#FF5757"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

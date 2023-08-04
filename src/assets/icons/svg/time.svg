@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>组 384</title>
+    <g id="组织生活" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="组织生活备份" transform="translate(-28.000000, -403.000000)" fill="#FF5757" fill-rule="nonzero">
+            <g id="编组-5" transform="translate(16.000000, 255.000000)">
+                <g id="217时间" transform="translate(12.000000, 148.000000)">
+                    <rect id="矩形" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                    <path d="M8,1 C4.1375,1 1,4.1375 1,8 C1,11.8625 4.1375,15 8,15 C11.8625,15 15,11.8625 15,8 C15,4.1375 11.8625,1 8,1 Z M10.9875,10.4375 L7.6375,8.5 L7.5,8.5 L7.5,4 L8.5,4 L8.5,7.85 L11.4875,9.575 L10.9875,10.4375 Z" id="形状"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

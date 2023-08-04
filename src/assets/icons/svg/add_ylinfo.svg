@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="76px" height="76px" viewBox="0 0 76 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>进入管理</title>
+    <defs>
+        <path d="M26,52 C40.4,52 52,40.4 52,26 C52,11.73 40.4,0 26,0 C11.6,0 0,11.6 0,26 C0,40.4 11.73,52 26,52 Z" id="path-1"></path>
+        <filter x="-36.5%" y="-32.7%" width="173.1%" height="173.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0.341176471   0 0 0 0 0.341176471  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="组织队伍分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="党建翼联我的" transform="translate(-295.000000, -549.000000)">
+            <g id="进入管理" transform="translate(307.000000, 559.000000)">
+                <g id="路径">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FF5757" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="编组-10" transform="translate(14.000000, 13.000000)" fill="#FFFFFF">
+                    <rect id="矩形" x="0" y="11" width="24" height="2"></rect>
+                    <rect id="矩形备份-2" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="3.41060513e-13" y="11" width="24" height="2"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

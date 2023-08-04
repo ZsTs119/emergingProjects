@@ -1,0 +1,97 @@
+{
+  "name": "lottery-activity-h5",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve --mode dev",
+    "dev:h5": "vue-cli-service serve --mode devh5",
+    "pre": "vue-cli-service serve --mode pre",
+    "test": "vue-cli-service serve --mode test",
+    "local": "vue-cli-service serve --mode local",
+    "lint": "vue-cli-service lint",
+    "build:dev": "vue-cli-service build --mode dev",
+    "build:dev:h5": "vue-cli-service build --mode devh5",
+    "build:pre": "vue-cli-service build --mode pre",
+    "build:pre:h5": "vue-cli-service build --mode preh5",
+    "build:test": "vue-cli-service build --mode test",
+    "build:prod": "vue-cli-service build --mode prod",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
+    "@babel/parser": "7.7.4",
+    "@vue-office/excel": "^1.1.8",
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "echarts": "^5.4.2",
+    "echarts-gl": "^2.0.9",
+    "element-ui": "^2.15.9",
+    "html2canvas": "^1.4.1",
+    "js-cookie": "^3.0.1",
+    "lodash": "^4.17.21",
+    "mammoth": "^1.5.1",
+    "moment": "^2.29.4",
+    "nertc-web-sdk": "^4.6.50",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "normalize.css": "^8.0.1",
+    "pdfh5": "^1.4.2",
+    "qs": "^6.11.0",
+    "vant": "^2.12.48",
+    "vue": "^2.6.14",
+    "vue-amap": "^0.5.10",
+    "vue-clipboard2": "^0.3.3",
+    "vue-demi": "^0.13.11",
+    "vue-loader": "^17.2.2",
+    "vue-qrcode-reader": "^3.1.0",
+    "vue-quill-editor": "^3.0.6",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "babel-plugin-import": "^1.13.5",
+    "compression-webpack-plugin": "^5.0.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "husky": "^8.0.1",
+    "less": "^4.0.0",
+    "less-loader": "^8.0.0",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "postcss-px-to-viewport": "1.1.1",
+    "prettier": "^2.4.1",
+    "svg-sprite-loader": "5.1.1",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
