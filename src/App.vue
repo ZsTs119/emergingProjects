@@ -11,7 +11,15 @@
   <div id="app" class="app">
     <div class="emApp">
       <header class="nav">
-        <div class="nav_bar">头部</div>
+        <div class="nav_bar">
+          <div class="bar_container">
+            <a href="/" class="content_title">
+              <svg-icon icon-class="cowboy-hat-svgrepo-com" className="svg_icon" />
+              <span class="svg_title">EMERGING </span>
+            </a>
+            <div class="content"></div>
+          </div>
+        </div>
       </header>
       <aside class="aside">
         <nav>标签栏</nav>

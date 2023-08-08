@@ -1,4 +1,4 @@
-if (process.VUE_APP_MODE == 'devh5' || process.VUE_APP_MODE == 'preh5') {
+if (process.VUE_APP_MODE == 'devh5' || process.VUE_APP_MODE == 'preh5' || process.VUE_APP_MODE == 'prodh5') {
   module.exports = {
     plugins: {
       'postcss-px-to-viewport': {

@@ -39,6 +39,33 @@ header{
 aside{
   display: block;
 }
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+svg:not(:root) {
+  overflow-clip-margin: content-box;
+  overflow: hidden;
+}
+a:-webkit-any-link {
+  cursor: pointer;
+}
+a:hover{
+  opacity: 0.5;
+}
+a{
+  color: inherit;
+  text-decoration: inherit;
+  touch-action: manipulation;
+  background-color: transparent;
+}
 :root{
   /*
     text_color:字体颜色
@@ -80,6 +107,35 @@ aside{
       background-color: $background_color;
       word-spacing: normal;
       border-bottom: 1px solid $border_bottom_color;
+      .bar_container{
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: $screen_height;
+        .content_title{
+          display: flex;
+          align-items: center;
+          padding-top: 1px;
+          height: $nav_height;
+          transition: opacity .25s;
+            .svg_icon {
+              position: relative;
+              font-size: 35px;
+            }
+            .svg_title{
+              padding-left: 8px;
+              font-size: 16px;
+              font-weight: 500;
+            }
+          }
+          .content{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-grow: 1;
+          }
+      }
+
     }
   }
   .aside{

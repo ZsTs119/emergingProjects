@@ -15,6 +15,7 @@
     "build:pre:h5": "vue-cli-service build --mode preh5",
     "build:test": "vue-cli-service build --mode test",
     "build:prod": "vue-cli-service build --mode prod",
+    "build:prod:h5": "vue-cli-service build --mode prodh5",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
@@ -22,13 +23,13 @@
     "@babel/parser": "7.7.4",
     "@vue-office/excel": "^1.1.8",
     "axios": "^0.27.2",
-    "core-js": "^3.8.3",
+    "core-js": "^3.32.0",
     "echarts": "^5.4.2",
     "echarts-gl": "^2.0.9",
     "element-ui": "^2.15.9",
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.1",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "mammoth": "^1.5.1",
     "moment": "^2.29.4",
     "nertc-web-sdk": "^4.6.50",
@@ -52,6 +53,8 @@
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.22.10",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
@@ -66,13 +69,15 @@
     "husky": "^8.0.1",
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
-    "sass": "^1.25.0",
-    "sass-loader": "^8.0.2",
     "lint-staged": "^13.0.3",
     "postcss-px-to-viewport": "1.1.1",
     "prettier": "^2.4.1",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
     "svg-sprite-loader": "5.1.1",
-    "vue-template-compiler": "^2.6.14"
+    "terser-webpack-plugin": "^5.3.9",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-bundle-analyzer": "^4.9.0"
   },
   "eslintConfig": {
     "root": true,
@@ -93,5 +98,6 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "sideEffects": false
 }

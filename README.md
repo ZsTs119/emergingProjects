@@ -1,2 +1,21 @@
-# emergingProjects
-记录自己做一些有趣的CSS,JS,Echarts组件
+# pms-web-h5
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
