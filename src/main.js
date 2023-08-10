@@ -1,13 +1,15 @@
+// import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import VueClipboard from 'vue-clipboard2';
 import 'normalize.css';
-import './assets/icons'; // icon
-Vue.use(VueClipboard);
-Vue.use(Vant);
-Vue.use(ElementUI);
-Vue.prototype.$echarts = echarts;
+const req = require.context('@/assets/icons/svg', false, /\.svg$/)
+const requireAll = requireContext => {
+  requireContext.keys().map(requireContext)
+}
+requireAll(req)
+import SvgIcon from '@/components/SvgIcon';
+Vue.component('svg-icon', SvgIcon);
 Vue.config.productionTip = false;
 new Vue({
   router,

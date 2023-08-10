@@ -9,6 +9,12 @@ module.exports = {
   ],
   "plugins": [
     '@babel/plugin-syntax-dynamic-import',// 异步加载语法编译插件
+    //vant按需加载
+    ["import", {
+      "libraryName": "vant",
+      "libraryDirectory": "es",
+      "style": true
+    }]
   ],
   'env': {
     'development': {
@@ -23,5 +29,6 @@ module.exports = {
         ]
       ]
     }
-  }
+  },
+
 };

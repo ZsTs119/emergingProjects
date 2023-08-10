@@ -1,0 +1,42 @@
+@import "./index.scss";
+@mixin day_dark() {
+  [data-theme=dark]{
+    .swith_check{
+      background-color: hsl(0, 0%, 10%);
+      transform: translate(18px);
+    }
+    .switch_icon{
+      .switch_icon_sun {
+          opacity: 0 !important;
+        }
+      
+        .switch_icon_moon {
+          opacity: 1 !important;
+        }
+      svg{
+      fill: rgba(255, 255, 255, .87);
+      transition: opacity .25s;
+      }
+      
+    }
+    color-scheme: dark;
+    --text_color: rgba(255, 255, 255, .87);
+    --background_color: #1a1a1a;
+    --border_bottom_color: rgba(84, 84, 84, .48);
+    --svg_link_color: rgba(235, 235, 235, .6);
+    --switch_border_color: rgba(84, 84, 84, .65);
+    --switch_background_color: #2f2f2f;
+    --switch_check_svg_background_color: #1a1a1a;
+    --switch_check_svg_text_color:rgba(255, 255, 255, .87);
+  }
+  [data-theme=day]{
+    --text_color: #213547;
+    --background_color: #ffffff;
+    --border_bottom_color: rgba(60, 60, 60, .12);
+    --svg_link_color: rgba(60, 60, 60, .7);
+    --switch_border_color: rgba(60, 60, 60, .29);
+    --switch_background_color: #f1f1f1;
+    --switch_check_svg_background_color: #ffffff;
+    --switch_check_svg_text_color: rgba(60, 60, 60, .7);
+  }
+}

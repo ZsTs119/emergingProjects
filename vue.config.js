@@ -90,9 +90,13 @@ module.exports = defineConfig({
       concatenateModules: true
     },
     externals: {
-      vue: 'Vue',
+      // CDN 的 Element 依赖全局变量 Vue， 所以 Vue 也需要使用 CDN 引入
+      'vue': 'Vue',
+      // 属性名称 element-ui, 表示遇到 import xxx from 'element-ui' 这类引入 'element-ui'的，
+      // 不去 node_modules 中找，而是去找 全局变量 ELEMENT
+      'element-ui': 'ELEMENT',//需要纯大写
       'vue-router': 'VueRouter',
-      axios: 'axios'
+      'axios': 'axios'
     }
 
   },
@@ -102,20 +106,22 @@ module.exports = defineConfig({
       config.plugin('bundle-analyzer')
         .use(BundleAnalyzerPlugin)
     }
-    // set svg-sprite-loader
-    config.module.rule('svg').exclude.add(resolve('src/assets/icons')).end();
+    // svg图标加载
     config.module
-      .rule('icons')
-      .test(/\.svg$/)
-      .include.add(resolve('src/assets/icons'))
+      .rule('svg')
+      .exclude.add(path.join(__dirname, 'src/assets/icons/svg'))
       .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({
-        symbolId: 'icon-[name]',
-      })
-      .end();
-    config.plugins.delete('prefetch')
 
+    config.module
+      .rule('icons')// 定义一个名叫 icons 的规则
+      .test(/\.svg$/)// 设置 icons 的匹配正则
+      .include.add(path.join(__dirname, 'src/assets/icons/svg'))// 设置当前规则的作用目录，只在当前目录下才执行当前规则
+      .end()
+      .use('svg-sprite')// 指定一个名叫 svg-sprite 的 loader 配置
+      .loader('svg-sprite-loader')// 该配置使用 svg-sprite-loader 作为处理 loader
+      .options({// 该 svg-sprite-loader 的配置
+        symbolId: 'icon-[name]'
+      })
+      .end()
   },
 });
