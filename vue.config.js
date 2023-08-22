@@ -96,7 +96,8 @@ module.exports = defineConfig({
       // 不去 node_modules 中找，而是去找 全局变量 ELEMENT
       'element-ui': 'ELEMENT',//需要纯大写
       'vue-router': 'VueRouter',
-      'axios': 'axios'
+      'axios': 'axios',
+      'echarts': 'echarts'
     }
 
   },

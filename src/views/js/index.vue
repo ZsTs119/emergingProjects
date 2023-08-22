@@ -1,15 +1,13 @@
 <style lang="scss" scoped></style>
 <template>
-  <div class="screen">
-    <div class="screen_doc">
-      <router-view></router-view>
-    </div>
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name : "",
+  name : "jsHome",
   data(){
     return{
     }
@@ -26,7 +24,7 @@ export default {
     this.initData()
   },
   methods: {
-    initData(){
+    initData() {
     },
   }
 }

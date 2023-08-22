@@ -1,15 +1,11 @@
 <style lang="scss" scoped></style>
 <template>
-  <div class="screen">
-    <div class="screen_doc">
-      <router-view></router-view>
-    </div>
-  </div>
+  <div>7天</div>
 </template>
 
 <script>
 export default {
-  name : "",
+  name : "jsSelectSevenDays",
   data(){
     return{
     }
@@ -26,7 +22,7 @@ export default {
     this.initData()
   },
   methods: {
-    initData(){
+    initData() {
     },
   }
 }

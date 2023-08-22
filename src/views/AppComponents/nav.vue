@@ -10,9 +10,15 @@
         <div class="content">
           <div class="conten_empty"></div>
           <div class="content_menu">
-            <block v-for="(item,index) in menuList" :key="index">
-              <div class="menu_link" :class="menuIndexCurrent(index)" @click="menuIndexClick(index)">{{item}}</div>
-            </block>
+            <div
+              class="menu_link"
+              v-for="(item,index) in menuList"
+              :key="index"
+              :class="menuIndexCurrent(index)"
+              @click="menuIndexClick(index,item)"
+            >
+              {{item}}
+            </div>
           </div>
           <div class="content_swith_button" @click="swithCheck">
             <div class="swith">
@@ -80,7 +86,7 @@
                 ></path>
               </svg>
             </a>
-            <a class="social_link is_small" href="/" title="zsts@foxmail.com" rel="noopener noreferrer">
+            <a class="social_link is_small" title="zsts@foxmail.com" rel="noopener noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
@@ -106,23 +112,39 @@ export default {
   data(){
     return {
       switchCheckBooln: true,
-      menuList: ['JavaScript','CSS','Echarts'],
+      menuList: ['JavaScript', 'CSS', 'Echarts'],
       menuIndex:0
     }
   },
-  beforeCreate(){
 
-  },
   created(){
 
   },
-  watch:{
+  computed: {
+  },
+  watch: {
   },
   mounted(){
     this.initData()
+    this.$bus.$on('routerNowInfo',this.routerNowInfoFn)
+  },
+  beforeDestroy() {
+    this.$bus.$off('routerNowInfo')
   },
   methods: {
     initData(){
+    },
+    routerNowInfoFn(e) {
+      let list = []
+      e.forEach(e => {
+        list.push(e.name)
+      });
+      this.menuList.forEach((e, i) => {
+        if (list.includes(e)) {
+          // console.log('当前索引', i)
+          this.menuIndex = i
+        }
+      });
     },
     swithCheck() {
       if (this.switchCheckBooln) {
@@ -135,8 +157,10 @@ export default {
     menuIndexCurrent(e) {
       if(e == this.menuIndex) return 'menu_active'
     },
-    menuIndexClick(e) {
+    menuIndexClick(e,i) {
       this.menuIndex = e
+      this.$router.push({name:i})
+
     }
 
   }

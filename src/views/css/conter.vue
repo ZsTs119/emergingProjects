@@ -1,15 +1,11 @@
 <style lang="scss" scoped></style>
 <template>
-  <div class="screen">
-    <div class="screen_doc">
-      <router-view></router-view>
-    </div>
-  </div>
+  <div>计数器</div>
 </template>
 
 <script>
 export default {
-  name : "",
+  name : "CssConter",
   data(){
     return{
     }

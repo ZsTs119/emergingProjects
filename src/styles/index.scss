@@ -286,8 +286,29 @@ a{
     background-color: $background_color;
     nav{
       display: block;
-      padding-top: 24px;
+      padding-top: 44px;
       outline: 0;
+      .group{
+        cursor: pointer;
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        padding: 15px 15px;
+        user-select: none;
+          // background-color: saddlebrown;
+          &:hover{
+            font-weight: bold;
+          }
+      }
+      .groupActive {
+        color: #cb8252;
+        font-weight: bold;
+        box-shadow: -1px 1px 2px  #cb8252;
+      }
+
+
     }
   }
   .screen{
