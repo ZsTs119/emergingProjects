@@ -57,9 +57,9 @@ export default {
         this.$store.commit('App/SET_ROUTER_NOW_INFO', to.matched)
         this.$bus.$emit('routerNowInfo',to.matched)
         // console.log('存储了',this.$store.state.App.routerNowInfo);
-        console.log('当前路由',this.$route)
-        console.log('当前记录', route)
-        console.log('当前路由子路由',this.routesList)
+        // console.log('当前路由',this.$route)
+        // console.log('当前记录', route)
+        // console.log('当前路由子路由',this.routesList)
       },
        deep: true,
       immediate: true,

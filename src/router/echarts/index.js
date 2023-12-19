@@ -4,8 +4,17 @@ const echartsDemo1 = [
     name: 'carousel',
     component: () => import('@/views/echarts/carousel.vue'),
     meta: {
-      title: '轮播滚动',
+      title: '可控制横向柱状图滚动',
       permission: 'echarts.carousel',
+    },
+  },
+  {
+    path: 'columncarousel',
+    name: 'columnCarousel',
+    component: () => import('@/views/echarts/columnCarousel.vue'),
+    meta: {
+      title: '竖向柱状图滚动',
+      permission: 'echarts.columnCarousel',
     },
   },
   {

@@ -1,4 +1,3 @@
-import axios from "axios";
 import store from '@/store'
 import { Loading, Message, MessageBox } from "element-ui";
 import errorCode from '@/utils/errorCode'

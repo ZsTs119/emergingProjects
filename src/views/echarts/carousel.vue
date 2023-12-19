@@ -3,7 +3,7 @@
   width: 100%;
   min-height: 302px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   .echarts {
@@ -13,11 +13,46 @@
     background-color:#020c19;
 
   }
+  .echartsButton{
+    position: relative;
+    width:80%;
+    height: 8px;
+    background: url("@/assets/images/carouselBg.png") no-repeat no-repeat;
+    background-size: 100% 100%;
+    background-color:#020c19;
+
+    .buttonLeft{
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      left: 0;
+      top: -40px;
+      background: url("@/assets/images/carouselLeftIcon.png") no-repeat
+        no-repeat;
+      z-index: 2;
+      background-size: 100% 100%;
+    }
+    .buttonRight{
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      right: 0;
+      top: -40px;
+      background: url("@/assets/images/carouselRightIcon.png") no-repeat
+        no-repeat;
+      z-index: 2;
+      background-size: 100% 100%;
+    }
+  }
   @media (min-width:1440px) {
     .echarts {
       width: 60%;
       height: 211px;
       background-color:#020c19;
+    }
+    .echartsButton{
+      width: 60%;
+      height: 8px;
     }
   }
 }
@@ -25,6 +60,10 @@
 <template>
   <div class="echartsCarousel" @mouseenter="ecahrtsMouseenter" @mouseleave="echartsMouseleave">
     <div class="echarts" ref="CarouselEcharts"></div>
+    <div class="echartsButton">
+      <div class="buttonLeft" v-if="echartsLeftRightButton || right - echartZoomNum != 0" @click="EchartsLeft"></div>
+      <div class="buttonRight" v-if="!echartsLeftRightButton || left + echartZoomNum < 100" @click="EchartsRight"></div>
+    </div>
   </div>
 </template>
 
@@ -85,23 +124,23 @@ export default {
       let info = {
         //x轴数据
         xAxis: [
-          '数据','数据0','数据1','数据2','数据3', '数据4','数据5','数据6','数据7','数据8', '数据9','数据10','数据11','数据12','数据13','数据14','数据15','数据16'
+          '数据','数据0','数据1','数据2','数据3', '数据4','数据5','数据6','数据7','数据8', '数据9','数据10','数据11','数据12','数据13','数据14','数据15','数据16','数据17','数据18','数据19','数据20'
         ],
         //派单数数据
         seriesPds: [
-          100,80,70,90,50,100,80,70,90,50,100,80,70,90,50,70,90,50
+          100,80,70,90,50,100,80,70,90,50,100,80,70,90,50,70,90,50,50,70,90,50
         ],
         //接单数数据
         seriesJds: [
-          50,90,70,80,100, 50,90,70,80,100, 50,90,70,80,100,70,80,100
+          50,90,70,80,100, 50,90,70,80,100, 50,90,70,80,100,70,80,100,100,70,80,100
         ],
         //及时率数据
         seriesJsl: [
-          100,80,70,90,50,100,80,70,90,50,100,80,70,90,50,70,90,50
+          100,80,70,90,50,100,80,70,90,50,100,80,70,90,50,70,90,50,50,70,90,50
         ],
         //完成率
         seriesWcl: [
-          50,90,70,80,100,50,90,70,80,100,50,90,70,80,100,70,80,100
+          50,90,70,80,100,50,90,70,80,100,50,90,70,80,100,70,80,100,100,70,80,100
         ],
       };
       this.ChartData(info);
@@ -140,8 +179,8 @@ export default {
           show: false,
         },
         grid: {
-          left: "0%",
-          right: "0%",
+          left: "10",
+          right: "10",
           top: "18%",
           height: 160,
           containLabel: true,
@@ -185,7 +224,7 @@ export default {
             textStyle: {
               fontSize: 14,
             },
-            itemGap: 17,
+            itemGap: 30,
             itemHeight: 32,
             itemWidth: 32,
             data: [
@@ -193,7 +232,7 @@ export default {
                 name: "派单数",
                 textStyle: {
                   color: "#fff",
-                  padding: [0, 0, 0, 10],
+                  padding: [5, 5, 5, 5],
                 },
                 icon: "image://http://cdn.lxculture.vip/echatBlue.png",
               },
@@ -201,7 +240,7 @@ export default {
                 name: "接单数",
                 textStyle: {
                   color: "#fff",
-                  padding: [0, 0, 0, 10],
+                  padding: [5, 5, 5, 5],
                 },
                 icon: "image://http://cdn.lxculture.vip/echats.png",
               },

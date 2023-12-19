@@ -70,7 +70,7 @@
             <a
               class="social_link is_small"
               href="https://github.com/ZsTs119/emergingProjects"
-              title="github"
+              title="github.com/ZsTs119"
               target="_blank"
               rel="noopener noreferrer"
             >

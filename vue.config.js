@@ -38,11 +38,15 @@ module.exports = defineConfig({
   devServer: {
     port: port,
     proxy: {
-      '/api': {
-        target: `http://api.dev.tyyd.com:8000`,
+      [process.env.VUE_APP_BASE_API]: {
+        target: process.env.NODE_ENV === 'development' ?
+          process.env.TEST_URL :
+          process.env.PRO_URL,
         changeOrigin: true,
+        ws: true,
         pathRewrite: {
-          '^/api': '',
+          ['^' + process.env.VUE_APP_BASE_API]:
+            [process.env.VUE_APP_BASE_API + '/']
         },
         bypass: function (req) {
           if (req.headers.accept.indexOf('html') !== -1) {
