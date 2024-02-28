@@ -21,13 +21,13 @@
 }
 </style>
 <template>
-  <div class="echartsMapChina">
+  <div class="echartsMapChina" ref="ShowMessageDiv">
     <div class="chinaEcharts" ref="echartsMapChinas"></div>
   </div>
 </template>
 
 <script>
-import { Message } from 'element-ui';
+import { showMessage } from "@/utils";
 export default {
   name : "echartsMap",
   data(){
@@ -198,10 +198,14 @@ export default {
       this.myChart.on("click", (params) => {
         // console.log("当前的params", params);
         // this.$emit("mapClick", params);
-        Message({
-          message: params.data?.name,
-          type: 'success',
-        });
+        showMessage({
+          content: params.data?.name,
+          type: "success",
+          container:this.$refs.ShowMessageDiv,
+          callback: function () {
+            console.log("我是自定义全局弹窗");
+          },
+        })
         this.mapData.forEach((item) => {
           if (item.name == params.data?.name) {
             if (item.isClick == false) {

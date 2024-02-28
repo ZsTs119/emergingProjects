@@ -37,14 +37,14 @@
 }
 </style>
 <template>
-  <div class="echartsMapPart">
+  <div class="echartsMapPart" ref="ShowMessageDiv">
     <div class="partEchartsOuterRing"></div>
     <div class="partEcharts" ref="echartsMapPart"></div>
   </div>
 </template>
 
 <script>
-import { Message } from 'element-ui';
+import { showMessage } from "@/utils";
 export default {
   name : "echartsMapPart",
   data(){
@@ -305,10 +305,14 @@ export default {
     },
     //拿到对应编码请求接口派发数据
     initData(e) {
-      Message({
-        message: e,
-        type: 'success',
-      });
+      showMessage({
+        content: e,
+        type: "success",
+        container:this.$refs.ShowMessageDiv,
+        callback: function () {
+          console.log("我是自定义全局弹窗");
+        },
+      })
     },
   }
 }

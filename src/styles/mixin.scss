@@ -1,3 +1,4 @@
+//切换主题混入
 @import "./index.scss";
 @mixin day_dark() {
   [data-theme=dark]{
