@@ -18,12 +18,14 @@ export default function (options = {}) {
   div.innerHTML = `<span class="${styles.icon}">${iconDom.outerHTML}</span><div>${content}</div>`
   const typeClassName = styles[`message-${type}`]
   div.className = `${styles.message} ${typeClassName}`
-  if (getComputedStyle(container).position === 'static') {
-    container.style.position = 'relative'
+  if (options.container) {
+    if (getComputedStyle(container).position === 'static') {
+      container.style.position = 'relative'
+    }
   }
   container.appendChild(div)
-  //强行渲染-读取元素的位置或者试图会强制渲染
-  container.clientWidth
+  //强行渲染-读取元素的位置或者试图会强制渲染 
+  div.clientWidth //导致reflow
   //回归正常
   div.style.opacity = "1";
   div.style.transform = `translate(-50%,-50%)`;

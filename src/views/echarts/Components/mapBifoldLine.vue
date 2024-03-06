@@ -3,6 +3,7 @@
   position: relative;
   width: 900px;
   height: 250px;
+  box-sizing: border-box;
   background: url("http://cdn.lxculture.vip/mapChinaBgs.png") no-repeat no-repeat;
   background-size: 100% 100%;
   .bifoldLineEcharts{

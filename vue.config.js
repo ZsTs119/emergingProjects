@@ -22,7 +22,7 @@ function getConfigPlugins() {
       })
     );
   }
-  plugins.push(new NodePolyfillPlugin());
+  plugins.push(new NodePolyfillPlugin()); //按需加载polyfill补足旧版本浏览器中缺失的 ECMAScript 新特性
   return plugins;
 }
 const name = process.env.VUE_APP_TITLE || 'EMERGING' // 网页标题
