@@ -39,6 +39,7 @@ export default {
 
   },
   mounted() {
+    console.log( '当前时间',new datatime().format('YYYY-MM-DD HH:mm:ss'))
   },
   methods: {
 
