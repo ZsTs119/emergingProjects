@@ -1,6 +1,6 @@
 <style lang="scss" scoped></style>
 <template>
-  <div>7天</div>
+  <div>选择7天</div>
 </template>
 
 <script>
