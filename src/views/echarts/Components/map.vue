@@ -1,43 +1,30 @@
 <style lang="scss" scoped>
-.echartsMapChina{
-  position: relative;
-  width: 936px;
-  height: 616px;
-  padding-top: 9px;
-  box-sizing: border-box;
-  background: url("http://cdn.lxculture.vip/mapChinaBgs.png") no-repeat no-repeat;
-  background-size: 100% 100%;
+@import "../index.scss";
 
-  .chinaEcharts {
-    width: 100%;
-    height: 577px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-      background: url("http://cdn.lxculture.vip/mapChinaBg.png") no-repeat no-repeat;
-  background-size: 100% 100%;
-  }
+.echarts-map__china {
+  width: 936px;
+  height: 577px;
+  z-index: 2;
 }
 </style>
 <template>
-  <div class="echartsMapChina" ref="ShowMessageDiv">
-    <div class="chinaEcharts" ref="echartsMapChinas"></div>
+  <div class="echarts-map flex-column-center" ref="ShowMessageDiv">
+    <div class="echarts-map__china" ref="echartsMapChinas"></div>
   </div>
 </template>
 
 <script>
 import { showMessage } from "@/utils";
 export default {
-  name : "echartsMap",
-  data(){
+  name: "echartsMap",
+  data() {
     return {
-      mapData: [],
-      echartsMapImg: "http://cdn.lxculture.vip/mapChinaMapBg.png",
+      aMapJsonData: [],
+      sEchartsMapImgUrl: "http://cdn.lxculture.vip/mapChinaMapBg.png",
     }
   },
   computed: {
-    options() {
+    oMapOptions() {
       return {
         // backgroundColor: "black",
         //3d地图配置部分
@@ -81,15 +68,15 @@ export default {
             },
           },
         },
-          graphic: [
+        graphic: [
           {
             type: "image",
             style: {
-              image: this.echartsMapImg,
+              image: this.sEchartsMapImgUrl,
               width: 742,
               height: 610,
               x: 96,
-              y:6,
+              y: 6,
             },
           },
         ],
@@ -128,19 +115,19 @@ export default {
               areaColor: "",
             },
           },
-          data: this.mapData,
+          data: this.aMapJsonData,
           selectedMode: false,
         },
       };
     },
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
-  created(){
+  created() {
 
   },
-  watch:{
+  watch: {
   },
   mounted() {
     // 获取地图数据
@@ -149,11 +136,11 @@ export default {
   methods: {
     // 获取地图信息
     getMapInfo() {
-       this.$axios.get("../../mapJson/china.json").then((res) => {
+      this.$axios.get("../../mapJson/china.json").then((res) => {
         if (res) {
           // console.log("地图数据", res);
           res.features.forEach((e) => {
-            this.mapData.push({
+            this.aMapJsonData.push({
               name: e.properties.name, //区块名称
               label: { color: "#fff" },
               itemStyle: {
@@ -184,29 +171,29 @@ export default {
           });
           window.echarts.registerMap("china", res);
           this.myChart = window.echarts.init(this.$refs.echartsMapChinas);
-          this.myChart.setOption(this.options, true);
-          window.addEventListener("resize",()=>{
-              this.myChart.resize();
+          this.myChart.setOption(this.oMapOptions, true);
+          window.addEventListener("resize", () => {
+            this.myChart.resize();
           });
-          this.initMapClick();
-          // console.log('@',this.mapData,this.options)
+          this.clickMapEvent();
+          // console.log('@',this.aMapJsonData,this.oMapOptions)
         }
       });
     },
     //地图点击
-    initMapClick() {
+    clickMapEvent() {
       this.myChart.on("click", (params) => {
         // console.log("当前的params", params);
         // this.$emit("mapClick", params);
         showMessage({
           content: params.data?.name,
           type: "success",
-          container:this.$refs.ShowMessageDiv,
+          container: this.$refs.ShowMessageDiv,
           callback: function () {
             console.log("我是自定义全局弹窗");
           },
         })
-        this.mapData.forEach((item) => {
+        this.aMapJsonData.forEach((item) => {
           if (item.name == params.data?.name) {
             if (item.isClick == false) {
               // 设置高亮 设置为选中区域数据
@@ -255,12 +242,12 @@ export default {
             };
           }
         });
-        this.myChart.setOption(this.options, true);
+        this.myChart.setOption(this.oMapOptions, true);
       });
     },
-    //地图变成默认
-    initMapDefind() {
-      this.mapData.forEach((item) => {
+    //点击地图默认
+    clickMapDefault() {
+      this.aMapJsonData.forEach((item) => {
         // 取消其余部分高亮
         item.isClick = false;
         item.itemStyle.normal.areaColor = {
@@ -281,7 +268,7 @@ export default {
           globalCoord: false, // 缺省为 false
         };
       });
-      this.myChart.setOption(this.options, true);
+      this.myChart.setOption(this.oMapOptions, true);
     },
   }
 }

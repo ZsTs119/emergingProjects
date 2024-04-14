@@ -9,25 +9,22 @@
 
 <script>
 export default {
-  name : "",
-  data(){
-    return{
+  name: "appScreen",
+  data() {
+    return {
     }
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
-  created(){
+  created() {
 
   },
-  watch:{
+  watch: {
   },
-  mounted(){
-    this.initData()
+  mounted() {
   },
   methods: {
-    initData(){
-    },
   }
 }
 </script>

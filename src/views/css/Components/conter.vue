@@ -1,28 +1,28 @@
 <style lang="scss" scoped></style>
 <template>
-  <div>计数器</div>
+  <div>即将上线...</div>
 </template>
 
 <script>
 export default {
-  name : "CssConter",
-  data(){
-    return{
+  name: "CssConter",
+  data() {
+    return {
     }
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
-  created(){
+  created() {
 
   },
-  watch:{
+  watch: {
   },
-  mounted(){
+  mounted() {
     this.initData()
   },
   methods: {
-    initData(){
+    initData() {
     },
   }
 }

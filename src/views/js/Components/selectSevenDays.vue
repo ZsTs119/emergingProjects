@@ -1,6 +1,6 @@
 <style lang="scss" scoped></style>
 <template>
-  <div>选择7天</div>
+  <div>即将上线...</div>
 </template>
 
 <script>

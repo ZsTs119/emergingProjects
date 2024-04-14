@@ -1,66 +1,63 @@
 <style lang="scss" scoped>
-.echartsMapPart{
-  position: relative;
-  width: 936px;
-  height: 726px;
-  padding-top: 9px;
-  box-sizing: border-box;
-  background: url("http://cdn.lxculture.vip/mapPartMapBgs.png") no-repeat no-repeat;
+@import "../index.scss";
+
+.echarts-map__ruian-outer-ring {
+  position: absolute;
+  width: 678px;
+  height: 678px;
+  top: 30px;
+  left: 268px;
+  background: url("http://cdn.lxculture.vip/mapPartMapBgOuterRingBg.png") no-repeat no-repeat;
   background-size: 100% 100%;
-  .partEchartsOuterRing {
-    position: absolute;
-    width: 678px;
-    height: 678px;
-    top: 30px;
-    left: 68px;
-    background: url("http://cdn.lxculture.vip/mapPartMapBgOuterRingBg.png") no-repeat no-repeat;
-    background-size: 100% 100%;
+  transform: rotate(0deg);
+  animation: echarts-map__ruian-outer-ring-ani 18s linear infinite;
+}
+
+@keyframes echarts-map__ruian-outer-ring-ani {
+  0% {
     transform: rotate(0deg);
-    animation: partEchartsOuterRingAni 18s linear infinite;
   }
-  @keyframes partEchartsOuterRingAni {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+
+  100% {
+    transform: rotate(360deg);
   }
-  .partEcharts{
-    position: absolute;
-    left: 0%;
-    top: 14%;
-    width: 920px;
-    height: 726px;
-    z-index: 2;
-  }
+}
+
+.echarts-map__ruian {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 920px;
+  height: 726px;
+  transform: translate(-50%, -45%);
+  z-index: 2;
 }
 </style>
 <template>
-  <div class="echartsMapPart" ref="ShowMessageDiv">
-    <div class="partEchartsOuterRing"></div>
-    <div class="partEcharts" ref="echartsMapPart"></div>
+  <div class="echarts-map" ref="ShowMessageDiv">
+    <div class="echarts-map__ruian-outer-ring"></div>
+    <div class="echarts-map__ruian" ref="echartsMapPart"></div>
   </div>
 </template>
 
 <script>
 import { showMessage } from "@/utils";
 export default {
-  name : "echartsMapPart",
-  data(){
+  name: "echartsMapPart",
+  data() {
     return {
-      mapData: [],
-      echartsMapImg: "http://cdn.lxculture.vip/mapPartMapBg.png",
+      aMapJsonData: [],
+      sEchartsMapImgUrl: "http://cdn.lxculture.vip/mapPartMapBg.png",
     }
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
-  created(){
+  created() {
 
   },
-    computed: {
-    options() {
+  computed: {
+    oMapOptions() {
       return {
         // backgroundColor: "black",
         //3d地图配置部分
@@ -114,7 +111,7 @@ export default {
           {
             type: "image",
             style: {
-              image: this.echartsMapImg,
+              image: this.sEchartsMapImgUrl,
               width: 1140,
               height: 780,
               x: -62,
@@ -162,26 +159,26 @@ export default {
               areaColor: "transparent",
             },
           },
-          data: this.mapData,
+          data: this.aMapJsonData,
           selectedMode: false,
         },
       };
     },
   },
-  watch:{
+  watch: {
   },
-  mounted(){
+  mounted() {
     // 获取地图数据
-    this.getMapInfo();
+    this.getMapData();
   },
   methods: {
     // 获取地图信息
-    getMapInfo() {
+    getMapData() {
       this.$axios.get("../../mapJson/330381.json").then((res) => {
         if (res) {
           // console.log("地图数据", res.features);
           res.features.forEach((e) => {
-            this.mapData.push({
+            this.aMapJsonData.push({
               name: e.properties.name, //区块名称
               label: { color: "#ccc" },
               itemStyle: {
@@ -212,18 +209,18 @@ export default {
           });
           window.echarts.registerMap("china", res);
           this.myChart = window.echarts.init(this.$refs.echartsMapPart);
-          this.myChart.setOption(this.options, true);
-          this.initMapClick();
+          this.myChart.setOption(this.oMapOptions, true);
+          this.clickMapEvent();
         }
       });
     },
-     //地图点击
-    initMapClick() {
+    //地图点击
+    clickMapEvent() {
       this.myChart.on("click", (params) => {
         // console.log("当前的params", params);
         if (!params.name) return;
         // this.$emit("mapClick", params);
-        this.mapData.forEach((item) => {
+        this.aMapJsonData.forEach((item) => {
           if (item.name == params.data.name) {
             if (item.isClick == false) {
               // 设置高亮 设置为选中区域数据
@@ -238,7 +235,7 @@ export default {
                 },
               };
               //这里开始派发左右数据
-              this.initData(params.name);
+              this.getTownMapData(params.name);
             } else {
               // 取消高亮 设置为全部数据
               item.isClick = false;
@@ -300,15 +297,15 @@ export default {
             };
           }
         });
-        this.myChart.setOption(this.options, true);
+        this.myChart.setOption(this.oMapOptions, true);
       });
     },
     //拿到对应编码请求接口派发数据
-    initData(e) {
+    getTownMapData(e) {
       showMessage({
         content: e,
         type: "success",
-        container:this.$refs.ShowMessageDiv,
+        container: this.$refs.ShowMessageDiv,
         callback: function () {
           console.log("我是自定义全局弹窗");
         },

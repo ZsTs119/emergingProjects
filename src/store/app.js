@@ -2,11 +2,11 @@
 export default {
   namespaced: true,
   state: {
-    routerNowInfo: []
+    aNowRouterData: []
   },
   mutations: {
     SET_ROUTER_NOW_INFO(state, value) {
-      state.routerNowInfo = value
+      state.aNowRouterData = value
     }
   },
   actions: {

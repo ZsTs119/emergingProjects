@@ -2,13 +2,8 @@
 <template>
   <aside class="aside">
     <nav>
-      <div
-        class="group"
-        :class="groupActiveFn(item)"
-        @click="groupTo(item)"
-        v-for="(item,index) in routesList"
-        :key="index"
-      >
+      <div class="group" :class="activeSwitchTabClass(item)" @click="switchRouterTab(item)"
+        v-for="(item, index) in aRoutersData" :key="index">
         {{ item.meta.title }}
       </div>
     </nav>
@@ -17,13 +12,14 @@
 
 <script>
 export default {
-  name : "appAside",
-  data(){
+  name: "appAside",
+  data() {
     return {
-      routesList:null
+      //当前子路由
+      aRoutersData: null
     }
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
   computed: {
@@ -39,7 +35,7 @@ export default {
       return routes.children
     }
   },
-  created(){
+  created() {
 
   },
   watch: {
@@ -52,35 +48,35 @@ export default {
         for (let i = 0; i < route.length - 1; i++) {
           routes = routes.children.find((e) => (e.name == route[i].name));
         }
-        this.routesList = routes.children
-        this.pageRedirection(this.$route)
+        this.aRoutersData = routes.children
+        this.redireRouter(this.$route)
         this.$store.commit('App/SET_ROUTER_NOW_INFO', to.matched)
-        this.$bus.$emit('routerNowInfo',to.matched)
-        // console.log('存储了',this.$store.state.App.routerNowInfo);
+        this.$bus.$emit('setNowRouterData', to.matched)
+        // console.log('存储了',this.$store.state.App.setNowRouterData);
         // console.log('当前路由',this.$route)
         // console.log('当前记录', route)
-        // console.log('当前路由子路由',this.routesList)
+        // console.log('当前路由子路由',this.aRoutersData)
       },
-       deep: true,
+      deep: true,
       immediate: true,
     }
   },
-  mounted(){
-    this.initData()
+  mounted() {
   },
   methods: {
-    initData() {
+    //切换路由
+    switchRouterTab(e) {
+      this.$router.push({ name: e.name })
     },
-    groupTo(e) {
-      this.$router.push({name:e.name})
+    //动态样式函数
+    activeSwitchTabClass(e) {
+      if (e.name == this.$route.name) return 'groupActive'
     },
-    groupActiveFn(e) {
-      if(e.name == this.$route.name) return 'groupActive'
-    },
-    pageRedirection(e) {
-      if (e.name == 'JavaScript') this.$router.push({name:"selectSevenDays"})
-      if (e.name == 'CSS') this.$router.push({name:"conter"})
-      if (e.name == 'Echarts') this.$router.push({name:"carousel"})
+    //重定向路由
+    redireRouter(e) {
+      if (e.name == 'JavaScript') this.$router.push({ name: "selectSevenDays" })
+      if (e.name == 'CSS') this.$router.push({ name: "conter" })
+      if (e.name == 'Echarts') this.$router.push({ name: "carousel" })
     }
   }
 }

@@ -1,30 +1,62 @@
+//一些公共样式
+.absolute-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fixed-center {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 //项目全局配置及主题默认初始化
 *,
 :before,
 :after {
   box-sizing: border-box;
 }
-html{
+
+html {
   -webkit-text-size-adjust: 100%;
   overflow: hidden;
 }
-body{
+
+body {
   display: block;
   width: 100%;
+  height: 100vh;
   min-width: 320px;
   min-height: 100vh;
   font-family: Quotes,
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Roboto,
-  Oxygen,
-  Ubuntu,
-  Cantarell,
-  "Fira Sans",
-  "Droid Sans",
-  "Helvetica Neue",
-  sans-serif;
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
   letter-spacing: .2px;
   line-height: 24px;
   font-size: 16px;
@@ -36,12 +68,15 @@ body{
   text-rendering: unset !important;
   font-synthesis: unset !important;
 }
-header{
+
+header {
   display: block;
 }
-aside{
+
+aside {
   display: block;
 }
+
 img,
 svg,
 video,
@@ -53,23 +88,28 @@ object {
   display: block;
   vertical-align: middle;
 }
+
 svg:not(:root) {
   overflow-clip-margin: content-box;
   overflow: hidden;
 }
+
 a:-webkit-any-link {
   cursor: pointer;
 }
-a:hover{
+
+a:hover {
   opacity: 0.5;
 }
-a{
+
+a {
   color: inherit;
   text-decoration: inherit;
   touch-action: manipulation;
   background-color: transparent;
 }
-:root{
+
+:root {
   /*
     text_color:字体颜色
     background_color:背景颜色
@@ -80,315 +120,355 @@ a{
     switch_check_svg_background_color:switch切换按钮颜色
     switch_check_svg_text_color:switch切换按钮svg颜色
     */
-    --text_color: #213547;
-    --background_color: #ffffff;
-    --border_bottom_color: rgba(60, 60, 60, .12);
-    --svg_link_color:rgba(60, 60, 60, .7);
-    --switch_border_color:rgba(60, 60, 60, .29);
-    --switch_background_color:#f1f1f1;
-    --switch_check_svg_background_color:#ffffff;
-    --switch_check_svg_text_color:rgba(60, 60, 60, .7);
-    /*
+  --text_color: #213547;
+  --background_color: #ffffff;
+  --border_bottom_color: rgba(60, 60, 60, .12);
+  --svg_link_color: rgba(60, 60, 60, .7);
+  --switch_border_color: rgba(60, 60, 60, .29);
+  --switch_background_color: #f1f1f1;
+  --switch_check_svg_background_color: #ffffff;
+  --switch_check_svg_text_color: rgba(60, 60, 60, .7);
+  /*
     nav_height:头部
     aside_expand_height:左侧侧边栏除最小状态以外的宽度
     aside_shrink_height:左侧侧边栏最小时状态宽度
     screen_height:主体宽度
     */
-    --nav_height: 55px;
-    --aside_expand_height: 272px;
-    --aside_shrink_height: 320px;
-    --screen_height: 1376px;
+  --nav_height: 55px;
+  --aside_expand_height: 272px;
+  --aside_shrink_height: 320px;
+  --screen_height: 1376px;
 
 }
 
-  $text_color: var(--text_color);
-  $background_color: var(--background_color);
-  $border_bottom_color: var(--border_bottom_color);
-  $svg_link_color: var(--svg_link_color);
-  $switch_border_color: var(--switch_border_color);
-  $switch_background_color: var(--switch_background_color);
-  $switch_check_svg_background_color: var(--switch_check_svg_background_color);
-  $switch_check_svg_text_color: var(--switch_check_svg_text_color);
-  $nav_height: var(--nav_height);
-  $aside_expand_height: var(--aside_expand_height);
-  $aside_shrink_height: var(--aside_shrink_height);
-  $screen_height: var(--screen_height);
-  //svg大小样式
-  .is_small{
-    width: 36px;
-    height: 36px;
-  }
-  
-  //基础样式
-  .nav{
-    position: relative;
-    top: 0;
-    left: 0;
-    user-select: none;
-    .nav_bar{
-      position: relative;
-      padding: 0 12px 0 24px;
-      height: $nav_height;
-      background-color: $background_color;
-      word-spacing: normal;
-      border-bottom: 1px solid $border_bottom_color;
-      transition:  border-color .5s, background-color .5s;
-      .bar_container{
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto;
-        max-width: $screen_height;
-        .content_title{
-          display: flex;
-          align-items: center;
-          padding-top: 1px;
-          height: $nav_height;
-          transition: opacity .25s;
-            .svg_icon {
-              position: relative;
-              font-size: 35px;
-            }
-            .svg_title{
-              padding-left: 8px;
-              font-size: 16px;
-              font-weight: 500;
-            }
-          }
-          .content{
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            flex-grow: 1;
-            .conten_empty {
-              width: 1px;
-              height: 1px;
-              margin-left: 36px;
-              flex-grow: 1;
-            }
-            // background-color: saddlebrown;
-            .content_menu{
-                display: flex;
-                flex-grow: 1;
-              .menu_active{
-                border-bottom: 1px solid #cb8252 !important;
-                height: $nav_height;
-              }
-              .menu_link{
-                cursor: pointer;
-                display: block;
-                padding: 0 12px;
-                line-height: calc($nav_height - 1px);
-                font-size: 13px;
-                font-weight: 500;
-                color: $text_color;
-                border-bottom: 1px solid transparent;
-                transition: color .5s;
-                white-space: nowrap;
-                &:hover{
-                  // opacity: .7;
-                  color:#cb8252;
-                }
-              }
-            }
-            .content_swith_button{
-              margin-left: 36px;
-              .swith{
-                position: relative;
-                cursor: pointer;
-                width: 40px;
-                height: 22px;
-                margin: 0;
-                flex-shrink: 0;
-                outline: none !important;
-                line-height: inherit;
-                overflow: visible;
-                border-radius: 11px;
-                border: 1px solid $switch_border_color;
-                background-color: $switch_background_color;
-                transition: border-color .25s, background-color .25s;
-                &:hover{
-                  border-color:#8e8e8e;
-                }
-                .swith_check{
-                  position: absolute;
-                  top: 1px;
-                  left: 1px;
-                  width: 18px;
-                  height: 18px;
-                  border-radius: 50%;
-                  background-color: $switch_check_svg_background_color;
-                  box-shadow: 0 1px 2px rgba(0, 0, 0, .04),
-                    0 1px 2px rgba(0, 0, 0, .06);
-                  transition: background-color .25s, transform .25s;
-                  .switch_icon{
-                    position: relative;
-                    display: block;
-                    width: 18px;
-                    height: 18px;
-                    border-radius: 50%;
-                    overflow: hidden;
-                    svg{
-                      position: absolute;
-                      top: 3px;
-                      left: 3px;
-                      width: 12px;
-                      height: 12px;
-                      fill: $switch_check_svg_text_color;
-                    }
-                    .switch_icon_sun{
-                      opacity: 1
-                    }
-                    .switch_icon_moon{
-                      opacity: 0
-                    }
-                  }
-                }
-              }
-              
-            }
-            .content_link{
-              display: flex;
-              justify-content: center;
-              margin-left: 12px;
-                a:hover {
-                  opacity: 1;
-                  --svg_link_color:'';
-                }
-                .social_link{
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: $svg_link_color;
-                  transition: color .5s;
-                  .social_link_icon{
-                    width: 20px;
-                    height: 20px;
-                    fill: currentColor;
-                  }
-                }
-            }
-          }
-      }
+$text_color: var(--text_color);
+$background_color: var(--background_color);
+$border_bottom_color: var(--border_bottom_color);
+$svg_link_color: var(--svg_link_color);
+$switch_border_color: var(--switch_border_color);
+$switch_background_color: var(--switch_background_color);
+$switch_check_svg_background_color: var(--switch_check_svg_background_color);
+$switch_check_svg_text_color: var(--switch_check_svg_text_color);
+$nav_height: var(--nav_height);
+$aside_expand_height: var(--aside_expand_height);
+$aside_shrink_height: var(--aside_shrink_height);
+$screen_height: var(--screen_height);
 
-    }
-  }
-  .aside{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    padding: 0 32px 96px;
-    width: calc(100vw - 64px);
-    max-width: $aside_shrink_height;
-    opacity: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    transform: translate(-100%);
-    transition: background-color .5s,opacity .5s,transform .3s ease;
+//svg大小样式
+.is_small {
+  width: 36px;
+  height: 36px;
+}
+
+//基础样式
+.nav {
+  position: relative;
+  top: 0;
+  left: 0;
+  user-select: none;
+
+  .nav_bar {
+    position: relative;
+    padding: 0 12px 0 24px;
+    height: $nav_height;
     background-color: $background_color;
-    nav{
-      display: block;
-      padding-top: 44px;
-      outline: 0;
-      .group{
-        cursor: pointer;
-        position: relative;
-        width: 100%;
+    word-spacing: normal;
+    border-bottom: 1px solid $border_bottom_color;
+    transition: border-color .5s, background-color .5s;
+
+    .bar_container {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: $screen_height;
+
+      .content_title {
         display: flex;
         align-items: center;
-        font-size: 14px;
-        padding: 15px 15px;
-        user-select: none;
-          // background-color: saddlebrown;
-          &:hover{
-            font-weight: bold;
+        padding-top: 1px;
+        height: $nav_height;
+        transition: opacity .25s;
+
+        .svg_icon {
+          position: relative;
+          font-size: 35px;
+        }
+
+        .svg_title {
+          padding-left: 8px;
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+
+      .content {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-grow: 1;
+
+        .conten_empty {
+          width: 1px;
+          height: 1px;
+          margin-left: 36px;
+          flex-grow: 1;
+        }
+
+        // background-color: saddlebrown;
+        .content_menu {
+          display: flex;
+          flex-grow: 1;
+
+          .menu_active {
+            border-bottom: 1px solid #cb8252 !important;
+            height: $nav_height;
           }
-      }
-      .groupActive {
-        color: #cb8252;
-        font-weight: bold;
-        box-shadow: -1px 1px 2px  #cb8252;
-      }
 
+          .menu_link {
+            cursor: pointer;
+            display: block;
+            padding: 0 12px;
+            line-height: calc($nav_height - 1px);
+            font-size: 13px;
+            font-weight: 500;
+            color: $text_color;
+            border-bottom: 1px solid transparent;
+            transition: color .5s;
+            white-space: nowrap;
 
-    }
-  }
-  .screen{
-    .screen_doc{
-      padding: 32px 24px 96px;
-    }
-  }
+            &:hover {
+              // opacity: .7;
+              color: #cb8252;
+            }
+          }
+        }
 
-  //媒体查询适配
-  @media (max-width:768px) {
-    .screen{
-      overflow-x: hidden
-    }
-  }
-  @media (min-width:768px) {
-    .nav {
-      .nav_bar {
-        padding: 0 12px 0 32px
+        .content_swith_button {
+          margin-left: 36px;
+
+          .swith {
+            position: relative;
+            cursor: pointer;
+            width: 40px;
+            height: 22px;
+            margin: 0;
+            flex-shrink: 0;
+            outline: none !important;
+            line-height: inherit;
+            overflow: visible;
+            border-radius: 11px;
+            border: 1px solid $switch_border_color;
+            background-color: $switch_background_color;
+            transition: border-color .25s, background-color .25s;
+
+            &:hover {
+              border-color: #8e8e8e;
+            }
+
+            .swith_check {
+              position: absolute;
+              top: 1px;
+              left: 1px;
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              background-color: $switch_check_svg_background_color;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, .04),
+                0 1px 2px rgba(0, 0, 0, .06);
+              transition: background-color .25s, transform .25s;
+
+              .switch_icon {
+                position: relative;
+                display: block;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                overflow: hidden;
+
+                svg {
+                  position: absolute;
+                  top: 3px;
+                  left: 3px;
+                  width: 12px;
+                  height: 12px;
+                  fill: $switch_check_svg_text_color;
+                }
+
+                .switch_icon_sun {
+                  opacity: 1
+                }
+
+                .switch_icon_moon {
+                  opacity: 0
+                }
+              }
+            }
+          }
+
+        }
+
+        .content_link {
+          display: flex;
+          justify-content: center;
+          margin-left: 12px;
+
+          a:hover {
+            opacity: 1;
+            --svg_link_color: '';
+          }
+
+          .social_link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $svg_link_color;
+            transition: color .5s;
+
+            .social_link_icon {
+              width: 20px;
+              height: 20px;
+              fill: currentColor;
+            }
+          }
+        }
       }
     }
 
-    .screen {
-      .screen_doc {
-        padding: 48px 32px 96px
-      }
-    }
   }
-  @media (min-width:960px) {
-    .nav {
-      position: fixed;
-      top: 0;
+}
+
+.aside {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 32px 96px;
+  width: calc(100vw - 64px);
+  max-width: $aside_shrink_height;
+  opacity: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform: translate(-100%);
+  transition: background-color .5s, opacity .5s, transform .3s ease;
+  background-color: $background_color;
+
+  nav {
+    display: block;
+    padding-top: 44px;
+    outline: 0;
+
+    .group {
+      cursor: pointer;
+      position: relative;
       width: 100%;
-    }
-    .aside {
-      width: $aside_expand_height;
-      max-width: 100%;
-      top: $nav_height;
-      opacity: 1;
-      visibility: visible;
-      box-shadow: none;
-      transform: translate(0);
-      transition: border-color .5s, background-color .5s,transform .3s ;
-      border-right: 1px solid $border_bottom_color;
-    }
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      padding: 15px 15px;
+      user-select: none;
 
-    .screen {
-      padding-left: $aside_expand_height;
-      padding-top: $nav_height;
-
-      .screen_doc {
-        padding: 64px 64px 96px;
+      // background-color: saddlebrown;
+      &:hover {
+        font-weight: bold;
       }
+    }
+
+    .groupActive {
+      color: #cb8252;
+      font-weight: bold;
+      box-shadow: -1px 1px 2px #cb8252;
+    }
+
+
+  }
+}
+
+.screen {
+  height: 100vh;
+
+  .screen_doc {
+    height: 100%;
+    padding: 32px 24px 96px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+}
+
+//媒体查询适配
+@media (max-width:768px) {
+  .screen {
+    overflow-x: hidden
+  }
+}
+
+@media (min-width:768px) {
+  .nav {
+    .nav_bar {
+      padding: 0 12px 0 32px
     }
   }
-  @media (min-width:1280px) {
-    .nav {
-      .nav_bar {
-        padding: 0 32px;
-      }
-    }
 
-    .screen {
-      .screen_doc {
-        padding: 64px 0 96px 64px
-      }
+  .screen {
+    .screen_doc {
+      padding: 48px 32px 96px
     }
   }
-  @media (min-width:1440px) {
-    .aside {
-      padding: 0 32px 96px calc((100% - $screen_height) / 2);
-      width: calc((100% - $screen_height) / 2 + $aside_expand_height);
-    }
+}
 
-    .screen {
-      padding-left: calc((100vw - $screen_height) / 2 + $aside_expand_height);
+@media (min-width:960px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 
-      .screen_doc {
-        padding: 64px 0 96px 96px
-      }
+  .aside {
+    width: $aside_expand_height;
+    max-width: 100%;
+    top: $nav_height;
+    opacity: 1;
+    visibility: visible;
+    box-shadow: none;
+    transform: translate(0);
+    transition: border-color .5s, background-color .5s, transform .3s;
+    border-right: 1px solid $border_bottom_color;
+  }
+
+  .screen {
+    padding-left: $aside_expand_height;
+    padding-top: $nav_height;
+
+    .screen_doc {
+      padding: 64px 64px 96px;
     }
   }
+}
+
+@media (min-width:1280px) {
+  .nav {
+    .nav_bar {
+      padding: 0 32px;
+    }
+  }
+
+  .screen {
+    .screen_doc {
+      padding: 64px 0 96px 64px
+    }
+  }
+}
+
+@media (min-width:1440px) {
+  .aside {
+    padding: 0 32px 96px calc((100% - $screen_height) / 2);
+    width: calc((100% - $screen_height) / 2 + $aside_expand_height);
+  }
+
+  .screen {
+    padding-left: calc((100vw - $screen_height) / 2 + $aside_expand_height);
+
+    .screen_doc {
+      padding: 64px 0 96px 96px
+    }
+  }
+}

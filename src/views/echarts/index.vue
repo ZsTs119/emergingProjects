@@ -7,24 +7,24 @@
 
 <script>
 export default {
-  name : "echartsHome",
-  data(){
-    return{
+  name: "echartsHome",
+  data() {
+    return {
     }
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
-  created(){
+  created() {
 
   },
-  watch:{
+  watch: {
   },
-  mounted(){
+  mounted() {
     this.initData()
   },
   methods: {
-    initData(){
+    initData() {
     },
   }
 }

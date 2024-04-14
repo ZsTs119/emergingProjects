@@ -1,23 +1,12 @@
 <style lang="scss" scoped>
-.echartsMapBifoldLine{
-  position: relative;
-  width: 900px;
-  height: 250px;
-  box-sizing: border-box;
-  background: url("http://cdn.lxculture.vip/mapChinaBgs.png") no-repeat no-repeat;
-  background-size: 100% 100%;
-  .bifoldLineEcharts{
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-  }
-}
+@import "../index.scss";
 </style>
 <template>
-  <div class="echartsMapBifoldLine">
-    <div class="bifoldLineEcharts" ref="ehcartsMapBifoldLines"></div>
+  <div class="echarts-main flex-column-center">
+    <div class="echarts-main__flex flex-column-center">
+      <div class="echarts-main__flex__child" ref="ehcartsMapBifoldLines">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,16 +16,17 @@ export default {
 
   data() {
     return {
-      options: null,
+      oBifoldLineData: null,
     };
   },
 
   mounted() {
-    this.initData()
+    this.getBifoldLineData()
   },
 
   methods: {
-    initData() {
+    //获取折线数据
+    getBifoldLineData() {
       let info = {
         //x轴数据
         xAxis: [],
@@ -58,7 +48,7 @@ export default {
         { date: "1123", "正面信息": 200, "负面信息": 300 },
         { date: "1223", "正面信息": 100, "负面信息": 200 },
       ]
-        newName.map((item, index) => {
+      newName.map((item, index) => {
         if (index > 11) {
           return;
         }
@@ -76,10 +66,10 @@ export default {
           info.seriesEcharts2022.push(0);
         }
       });
-      this.ChartData(info);
+      this.setBifoldLineData(info);
     },
-    //图表初始化
-    ChartData(info) {
+    //赋值折线图
+    setBifoldLineData(info) {
       //舆情分析数据
       //x轴数据
       let xAxis = info.xAxis;
@@ -105,7 +95,7 @@ export default {
         max: Math.round(yAxisMAX),
         interval: Math.round(yAxisMAX / 4),
       };
-      this.options = {
+      this.oBifoldLineData = {
         backgroundColor: "",
         tooltip: {
           trigger: "axis",
@@ -117,7 +107,7 @@ export default {
           show: false,
         },
         grid: {
-          width:'96%',
+          width: '96%',
           height: 200,
           left: "2%",
           right: "0%",
@@ -206,7 +196,7 @@ export default {
             name: "负面信息",
             type: "line",
             tooltip: {
-              valueFormatter: function(value) {
+              valueFormatter: function (value) {
                 return value;
               },
             },
@@ -230,7 +220,7 @@ export default {
             name: "正面信息",
             type: "line",
             tooltip: {
-              valueFormatter: function(value) {
+              valueFormatter: function (value) {
                 return value;
               },
             },
@@ -253,8 +243,8 @@ export default {
         ],
       };
       this.myChart = window.echarts.init(this.$refs.ehcartsMapBifoldLines);
-      this.myChart.setOption(this.options);
-      window.addEventListener("resize",()=>{
+      this.myChart.setOption(this.oBifoldLineData);
+      window.addEventListener("resize", () => {
         this.myChart.resize();
       });
     },

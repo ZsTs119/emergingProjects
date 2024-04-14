@@ -1,9 +1,9 @@
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import SvgIcon from '@/components/SvgIcon';
 import { http } from "@/utils/axios.js";
 import 'normalize.css';
+import SvgIcon from '@/components/SvgIcon';
 const req = require.context('@/assets/icons/svg', false, /\.svg$/)
 const requireAll = requireContext => {
   requireContext.keys().map(requireContext)

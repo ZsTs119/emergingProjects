@@ -1,156 +1,107 @@
 <style lang="scss" scoped>
-.echartsColumCarousel{
-  width: 100%;
-  min-height: 302px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  .echarts {
-    margin: 0 auto;
-    width: 60%;
-    height: 211px;
-    background-color:#020c19;
-  }
-  .echartsButton{
-    position: relative;
-    width:60%;
-    height: 8px;
-    background: url("http://cdn.lxculture.vip/carouselBg.png") no-repeat no-repeat;
-    background-size: 100% 100%;
-    background-color:#020c19;
-
-    .buttonLeft{
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      left: 0;
-      top: -30px;
-      background: url("http://cdn.lxculture.vip/carouselLeftIcon.png") no-repeat
-        no-repeat;
-      z-index: 2;
-      background-size: 100% 100%;
-    }
-    .buttonRight{
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      right: 0;
-      top: -30px;
-      background: url("http://cdn.lxculture.vip/carouselRightIcon.png") no-repeat
-        no-repeat;
-      z-index: 2;
-      background-size: 100% 100%;
-    }
-  }
-}
- @media (min-width:1440px) {
-    .echarts {
-      width: 40%;
-      height: 211px;
-      background-color:#020c19;
-    }
-    .echartsButton{
-      width: 40%;
-      height: 8px;
-    }
-  }
+@import "../index.scss";
 </style>
 <template>
-  <div class="echartsColumCarousel" @mouseenter="ecahrtsMouseenter" @mouseleave="echartsMouseleave">
-    <div class="echarts" ref="ColumCarouselEcharts"></div>
-    <div class="echartsButton">
-      <div class="buttonLeft" v-if="echartsLeftRightButton || right - echartZoomNum != 0" @click="EchartsLeft"></div>
-      <div class="buttonRight" v-if="!echartsLeftRightButton || left + echartZoomNum < 100" @click="EchartsRight"></div>
+  <div class="echarts-main flex-column-center" @mouseenter="enterEchartsEvent" @mouseleave="leaveEchartsEvent">
+    <div class="echarts-main__flex flex-column-center">
+      <div class="echarts-main__flex__child" ref="ColumCarouselEcharts"></div>
+      <div class="echarts-main__flex__button">
+        <div class="echarts-main__flex__button__left"
+          v-if="bEchartsButtonArrowsShow || nEchartsScrollRightDistance - nEchartsDataLengthPercentage != 0"
+          @click="moveEchartsLeft"></div>
+        <div class="echarts-main__flex__button__right"
+          v-if="!bEchartsButtonArrowsShow || nEchartsScrollLeftDistance + nEchartsDataLengthPercentage < 100"
+          @click="moveEchartsRight">
+        </div>
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name : "echartsColumCarousel",
-  data(){
+  name: "echartsColumCarousel",
+  data() {
     return {
-      data: [],
-      myChart: null,
+      //图表实例对象
+      oEchartsInstanceObject: null,
       //图表变量
-      options: null,
-      yAxisLefts: null,
-      yAxisRightjsl: null,
-      yAxisRightwcl: null,
-      yAxisjsl: null,
-      yAxiswcl: null,
-      seriesPdss: null,
-      seriesJdss: null,
+      oEchartsOptions: null,
+      aEchartsYAxisLeftDatas: null,
+      aEchartsYAxisRightTimeLinesRate: null,
+      aEchartsYAxisRightFinisingRate: null,
+      aEchartsTimeLinesRateData: null,
+      aEchartsFinishingData: null,
+      aEchartsSendOrderData: null,
+      aEchartsTakeOrderData: null,
       //图表滚动变量
-      left: 0,
-      right: 25,
-      //赋值图表的显示百分进度
-      echartZoomNum: null,
+      nEchartsScrollLeftDistance: 0,
+      nEchartsScrollRightDistance: 25,
+      //赋值图表在Zoom上展示全部数量的百分之多少
+      nEchartsDataLengthPercentage: null,
       //自动滚动定时器
-      scroTimeEcharts: null,
+      oEchartsTime: null,
       //控制箭头的显隐
-      echartsLeftRightButton: false,
+      bEchartsButtonArrowsShow: false,
     }
   },
-  beforeCreate(){
+  beforeCreate() {
 
   },
-  created(){
+  created() {
 
   },
   beforeDestroy() {
-    window.removeEventListener("resize",()=>{
-        this.myChart.resize();
+    window.removeEventListener("resize", () => {
+      this.oEchartsInstanceObject.resize();
     });
-    clearInterval(this.scroTimeEcharts);
+    clearInterval(this.oEchartsTime);
   },
-  watch:{
+  watch: {
   },
-  mounted(){
-    this.initData()
+  mounted() {
+    this.getEchartsData()
   },
   methods: {
-    initData() {
-      if (this.myChart) {
-        this.myChart.clear();
+    getEchartsData() {
+      if (this.oEchartsInstanceObject) {
+        this.oEchartsInstanceObject.clear();
       }
       let info = {
         //y轴左侧数据
-        yAxisLeft: [
-          '数据','数据0','数据1','数据2','数据3', '数据4','数据5','数据6','数据7','数据8', '数据9','数据10','数据11','数据12','数据13','数据14','数据15','数据16','数据17','数据18','数据19','数据20'
+        aEchartsYAxisLeftDatas: [
+          '数据', '数据0', '数据1', '数据2', '数据3', '数据4', '数据5', '数据6', '数据7', '数据8', '数据9', '数据10', '数据11', '数据12', '数据13', '数据14', '数据15', '数据16', '数据17', '数据18', '数据19', '数据20'
         ],
         //y轴右侧数据
-        yAxisjsl: [  10,80,70,90,50,100,80,70,90,50,100,80,70,90,50,70,90,50,50,70,90,50],
-        yAxiswcl: [  5,90,70,80,100, 50,90,70,80,100, 50,90,70,80,100,70,80,100,100,70,80,100],
-        yAxisRightjsl: ["100%","80%","70%","90%","50%","100%","80%","70%","90%","50%","100%","80%","70%","90%","50%","100%","80%","70%","90%","50%",],
-        yAxisRightwcl: ["50%","90%","70%","80%","100%","50%","90%","70%","80%","100%","50%","90%","70%","80%","100%","50%","90%","70%","80%","100%",],
+        aEchartsTimeLinesRateData: [10, 80, 70, 90, 50, 100, 80, 70, 90, 50, 100, 80, 70, 90, 50, 70, 90, 50, 50, 70, 90, 50],
+        aEchartsFinishingData: [5, 90, 70, 80, 100, 50, 90, 70, 80, 100, 50, 90, 70, 80, 100, 70, 80, 100, 100, 70, 80, 100],
+        aEchartsYAxisRightTimeLinesRate: ["100%", "80%", "70%", "90%", "50%", "100%", "80%", "70%", "90%", "50%", "100%", "80%", "70%", "90%", "50%", "100%", "80%", "70%", "90%", "50%",],
+        aEchartsYAxisRightFinisingRate: ["50%", "90%", "70%", "80%", "100%", "50%", "90%", "70%", "80%", "100%", "50%", "90%", "70%", "80%", "100%", "50%", "90%", "70%", "80%", "100%",],
         //派单数数据
-        seriesPds: [5,20,7,40,100,5,20,7,40,100,5,20,7,40,100,5,20,7,40,100,],
+        aEchartsSendOrderData: [5, 20, 7, 40, 100, 5, 20, 7, 40, 100, 5, 20, 7, 40, 100, 5, 20, 7, 40, 100,],
         //接单数数据
-        seriesJds: [10,10,30,90,50,10,10,30,90,50,10,10,30,90,50,10,10,30,90,50,],
+        aEchartsTakeOrderData: [10, 10, 30, 90, 50, 10, 10, 30, 90, 50, 10, 10, 30, 90, 50, 10, 10, 30, 90, 50,],
       };
-      this.ChartData(info);
+      this.setEchartsData(info);
     },
-      //图表初始化
-    ChartData(info) {
+    //图表初始化
+    setEchartsData(info) {
       //y轴左侧数据
-      this.yAxisLefts = info.yAxisLeft;
+      this.aEchartsYAxisLeftDatas = info.aEchartsYAxisLeftDatas;
       //y轴右侧数据
-      this.yAxisRightjsl = info.yAxisRightjsl;
-      this.yAxisRightwcl = info.yAxisRightwcl;
-      this.yAxisjsl = info.yAxisjsl;
-      this.yAxiswcl = info.yAxiswcl;
+      this.aEchartsYAxisRightTimeLinesRate = info.aEchartsYAxisRightTimeLinesRate;
+      this.aEchartsYAxisRightFinisingRate = info.aEchartsYAxisRightFinisingRate;
+      this.aEchartsTimeLinesRateData = info.aEchartsTimeLinesRateData;
+      this.aEchartsFinishingData = info.aEchartsFinishingData;
       //派单数数据
-      this.seriesPdss = info.seriesPds;
+      this.aEchartsSendOrderData = info.aEchartsSendOrderData;
       //接单数数据
-      this.seriesJdss = info.seriesJds;
-      this.echartZoomNum = Number(
-        Math.floor(Number(100 / Math.floor(Number(this.yAxisLefts.length / 4))))
+      this.aEchartsTakeOrderData = info.aEchartsTakeOrderData;
+      this.nEchartsDataLengthPercentage = Number(
+        Math.floor(Number(100 / Math.floor(Number(this.aEchartsYAxisLeftDatas.length / 4))))
       );
-      // console.log("当前一段百分增长比", this.echartZoomNum);
-      this.right = this.echartZoomNum;
-      this.options = {
+      // console.log("当前一段百分增长比", this.nEchartsDataLengthPercentage);
+      this.nEchartsScrollRightDistance = this.nEchartsDataLengthPercentage;
+      this.oEchartsOptions = {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -225,7 +176,7 @@ export default {
             yAxisIndex: [0, 1, 2, 3],
             realtime: true, //是否实时更新视图
             start: 0, //开始位置
-            end: this.right, //结束位置
+            end: this.nEchartsScrollRightDistance, //结束位置
             height: 0, // 表示滚动条的高度，也就是粗细
             // width:20,
             left: 10, //组件距离右边距离
@@ -284,7 +235,7 @@ export default {
             },
             //y轴对默认的偏移位置
             offset: 10,
-            data: this.yAxisLefts,
+            data: this.aEchartsYAxisLeftDatas,
           },
           {
             type: "category",
@@ -305,7 +256,7 @@ export default {
             },
             //y轴对默认的偏移位置
             offset: 0,
-            data: this.yAxisRightjsl,
+            data: this.aEchartsYAxisRightTimeLinesRate,
           },
           {
             type: "category",
@@ -326,7 +277,7 @@ export default {
             },
             //y轴对默认的偏移位置
             offset: 30,
-            data: this.yAxisRightwcl,
+            data: this.aEchartsYAxisRightFinisingRate,
           },
         ],
         series: [
@@ -338,7 +289,7 @@ export default {
               focus: "series",
             },
             tooltip: {
-              valueFormatter: function(value) {
+              valueFormatter: function (value) {
                 return value + "%";
               },
             },
@@ -350,7 +301,7 @@ export default {
               },
             },
             zlevel: 3,
-            data: this.seriesJdss,
+            data: this.aEchartsTakeOrderData,
           },
           {
             //设置柱状图的距离，设-100%时,将会堆叠
@@ -361,7 +312,7 @@ export default {
               focus: "series",
             },
             tooltip: {
-              valueFormatter: function(value) {
+              valueFormatter: function (value) {
                 return value + "%";
               },
             },
@@ -387,7 +338,7 @@ export default {
               },
             },
             zlevel: 3,
-            data: this.seriesPdss,
+            data: this.aEchartsSendOrderData,
           },
           {
             //设置柱状图的距离，设-100%时,将会堆叠
@@ -398,7 +349,7 @@ export default {
               focus: "series",
             },
             tooltip: {
-              valueFormatter: function(value) {
+              valueFormatter: function (value) {
                 return value + "%";
               },
             },
@@ -424,7 +375,7 @@ export default {
               },
             },
             zlevel: 1,
-            data: this.yAxisjsl,
+            data: this.aEchartsTimeLinesRateData,
           },
           {
             //设置柱状图的距离，设-100%时,将会堆叠
@@ -435,7 +386,7 @@ export default {
               focus: "series",
             },
             tooltip: {
-              valueFormatter: function(value) {
+              valueFormatter: function (value) {
                 return value + "%";
               },
             },
@@ -461,77 +412,77 @@ export default {
               },
             },
             zlevel: 1,
-            data: this.yAxiswcl,
+            data: this.aEchartsFinishingData,
           },
         ],
       };
-      this.myChart = echarts.init(this.$refs.ColumCarouselEcharts);
-      this.myChart.setOption(this.options);
-      window.addEventListener("resize",()=>{
-          this.myChart.resize();
+      this.oEchartsInstanceObject = echarts.init(this.$refs.ColumCarouselEcharts);
+      this.oEchartsInstanceObject.setOption(this.oEchartsOptions);
+      window.addEventListener("resize", () => {
+        this.oEchartsInstanceObject.resize();
       });
       //调用定时任务
-      this.echartsTime();
+      this.scrollEchartsTime();
     },
-       //图表移入事件
-    ecahrtsMouseenter() {
+    //图表移入事件
+    enterEchartsEvent() {
       // console.log("我移入了");
-      clearInterval(this.scroTimeEcharts);
+      clearInterval(this.oEchartsTime);
     },
     //图表移出事件
-    echartsMouseleave() {
+    leaveEchartsEvent() {
       // console.log("我移出了");
       //调用定时任务
-      this.echartsTime();
+      this.scrollEchartsTime();
     },
     //定时滚动图表
-    echartsTime() {
-      clearInterval(this.scroTimeEcharts);
-      this.scroTimeEcharts = setInterval(() => {
-        if (this.right + this.echartZoomNum > 100) {
-          this.left = 0;
-          this.right = this.echartZoomNum;
-          let info = this.options;
+    scrollEchartsTime() {
+      clearInterval(this.oEchartsTime);
+      this.oEchartsTime = setInterval(() => {
+        if (this.nEchartsScrollRightDistance + this.nEchartsDataLengthPercentage > 100) {
+          this.nEchartsScrollLeftDistance = 0;
+          this.nEchartsScrollRightDistance = this.nEchartsDataLengthPercentage;
+          let info = this.oEchartsOptions;
           info.dataZoom[0].start = 0;
-          info.dataZoom[0].end = this.echartZoomNum;
-          this.myChart.setOption(info);
+          info.dataZoom[0].end = this.nEchartsDataLengthPercentage;
+          this.oEchartsInstanceObject.setOption(info);
         } else {
-          this.EchartsRight();
+          this.moveEchartsRight();
         }
       }, 2000);
     },
     //图表左移动
-    EchartsLeft() {
-      if (this.left - this.echartZoomNum <= 0) {
-        this.left = 0;
+    moveEchartsLeft() {
+      if (this.nEchartsScrollLeftDistance - this.nEchartsDataLengthPercentage <= 0) {
+        this.nEchartsScrollLeftDistance = 0;
       } else {
-        this.left -= this.echartZoomNum;
+        this.nEchartsScrollLeftDistance -= this.nEchartsDataLengthPercentage;
       }
-      this.right -= this.echartZoomNum;
-      let info = this.options;
-      info.dataZoom[0].start = this.left;
-      info.dataZoom[0].end = this.right;
-      this.myChart.setOption(info);
-      // console.log("左", this.left, this.right);
-      if (this.right - this.echartZoomNum <= 0) {
-        this.echartsLeftRightButton = false;
+      this.nEchartsScrollRightDistance -= this.nEchartsDataLengthPercentage;
+      let info = this.oEchartsOptions;
+      info.dataZoom[0].start = this.nEchartsScrollLeftDistance;
+      info.dataZoom[0].end = this.nEchartsScrollRightDistance;
+      this.oEchartsInstanceObject.setOption(info);
+      // console.log("左", this.nEchartsScrollLeftDistance, this.nEchartsScrollRightDistance);
+      if (this.nEchartsScrollRightDistance - this.nEchartsDataLengthPercentage <= 0) {
+        this.bEchartsButtonArrowsShow = false;
       }
     },
     //图表右移动
-    EchartsRight() {
-      this.left = this.right;
-      if (this.right + this.echartZoomNum >= 100) {
-        this.right = 100;
+    moveEchartsRight() {
+      this.nEchartsScrollLeftDistance = this.nEchartsScrollRightDistance;
+      if (this.nEchartsScrollRightDistance + this.nEchartsDataLengthPercentage >= 100) {
+        this.nEchartsScrollRightDistance = 100;
       } else {
-        this.right += this.echartZoomNum;
+        this.nEchartsScrollRightDistance += this.nEchartsDataLengthPercentage;
       }
-      let info = this.options;
-      info.dataZoom[0].start = this.left;
-      info.dataZoom[0].end = this.right;
-      this.myChart.setOption(info);
-      // console.log("右", this.left, this.right);
-      if (this.left + this.echartZoomNum >= 100) {
-        this.echartsLeftRightButton = true;
+      let info = this.oEchartsOptions;
+      info.dataZoom[0].start = this.nEchartsScrollLeftDistance;
+      info.dataZoom[0].end = this.nEchartsScrollRightDistance;
+      this.oEchartsInstanceObject.setOption(info);
+      // console.log("右", this.nEchartsScrollLeftDistance, this.nEchartsScrollRightDistance);
+      if (this.nEchartsScrollLeftDistance + this.nEchartsDataLengthPercentage >= 100) {
+        this.bEchartsButtonArrowsShow = true;
       }
     },
   }

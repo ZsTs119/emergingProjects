@@ -50,7 +50,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 默认重定向js页面
   if (to.path == '/') {
-    next({ name: 'JavaScript' })
+    next({ name: 'Echarts' })
   } else {
     next();
   }

@@ -1,0 +1,70 @@
+.echarts-main {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  box-sizing: border-box;
+  background-color: #020c19;
+
+  .echarts-main__flex {
+    width: 100%;
+    height: 300px;
+
+    .echarts-main__flex__child {
+      width: 80%;
+      height: 80%;
+    }
+
+    .echarts-main__flex__button {
+      position: relative;
+      width: 80%;
+      height: 8px;
+      background: url("http://cdn.lxculture.vip/carouselBg.png") no-repeat no-repeat;
+      background-size: 100% 100%;
+      background-color: #020c19;
+
+      .echarts-main__flex__button__left {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        left: 0;
+        top: -40px;
+        background: url("http://cdn.lxculture.vip/carouselLeftIcon.png") no-repeat no-repeat;
+        z-index: 2;
+        background-size: 100% 100%;
+      }
+
+      .echarts-main__flex__button__right {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        right: 0;
+        top: -40px;
+        background: url("http://cdn.lxculture.vip/carouselRightIcon.png") no-repeat no-repeat;
+        z-index: 2;
+        background-size: 100% 100%;
+      }
+    }
+
+    @media (min-width:1440px) {
+      .echarts-main__flex__child {
+        width: 60%;
+        height: 80%;
+        background-color: #020c19;
+      }
+
+      .echarts-main__flex__button {
+        width: 60%;
+        height: 8px;
+      }
+    }
+  }
+}
+
+.echarts-map {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  box-sizing: border-box;
+  background: url("http://cdn.lxculture.vip/mapPartMapBgs.png") no-repeat no-repeat;
+  background-size: 100% 100%;
+}

@@ -25,7 +25,7 @@ import navComp from "@/views/AppComponents/nav.vue";
 import asideComp from "@/views/AppComponents/aside.vue"
 import screenComp from "@/views/AppComponents/screen.vue"
 export default {
-  name: 'home',
+  name: 'app',
   components: {
     navComp,
     asideComp,
@@ -39,7 +39,7 @@ export default {
 
   },
   mounted() {
-    console.log( '当前时间',new datatime().format('YYYY-MM-DD HH:mm:ss'))
+    console.log( '当前时间',new Date())
   },
   methods: {
 

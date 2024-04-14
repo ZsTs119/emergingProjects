@@ -18,6 +18,42 @@ const echartsDemo1 = [
     },
   },
   {
+    path: 'mapBifoldLine',
+    name: 'mapBifoldLine',
+    component: () => import('@/views/echarts/Components/mapBifoldLine.vue'),
+    meta: {
+      title: '双折线',
+      permission: 'echarts.mapBifoldLine',
+    },
+  },
+  {
+    path: 'columnLineChart',
+    name: 'columnLineChart',
+    component: () => import('@/views/echarts/Components/columnLineChart.vue'),
+    meta: {
+      title: '柱形折线',
+      permission: 'echarts.columnLineChart',
+    },
+  },
+  {
+    path: '3Dcylinder',
+    name: '3Dcylinder',
+    component: () => import('@/views/echarts/Components/3Dcylinder.vue'),
+    meta: {
+      title: '3D圆柱',
+      permission: 'echarts.3Dcylinder',
+    },
+  },
+  {
+    path: 'wordCloud',
+    name: 'wordCloud',
+    component: () => import('@/views/echarts/Components/wordCloud.vue'),
+    meta: {
+      title: '词云',
+      permission: 'echarts.wordCloud',
+    },
+  },
+  {
     path: 'map',
     name: 'map',
     component: () => import('@/views/echarts/Components/map.vue'),
@@ -35,15 +71,7 @@ const echartsDemo1 = [
       permission: 'echarts.mapPart',
     },
   },
-  {
-    path: 'mapBifoldLine',
-    name: 'mapBifoldLine',
-    component: () => import('@/views/echarts/Components/mapBifoldLine.vue'),
-    meta: {
-      title: '双折线',
-      permission: 'echarts.mapBifoldLine',
-    },
-  },
+
 ]
 const echartsReview = [
   ...echartsDemo1
