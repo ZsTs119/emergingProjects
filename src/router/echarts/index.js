@@ -54,6 +54,24 @@ const echartsDemo1 = [
     },
   },
   {
+    path: 'radarMap',
+    name: 'radarMap',
+    component: () => import('@/views/echarts/Components/radarMap.vue'),
+    meta: {
+      title: '雷达图',
+      permission: 'echarts.radarMap',
+    },
+  },
+  {
+    path: 'board',
+    name: 'board',
+    component: () => import('@/views/echarts/Components/board.vue'),
+    meta: {
+      title: '仪表盘',
+      permission: 'echarts.board',
+    },
+  },
+  {
     path: 'map',
     name: 'map',
     component: () => import('@/views/echarts/Components/map.vue'),
