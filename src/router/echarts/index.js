@@ -72,6 +72,42 @@ const echartsDemo1 = [
     },
   },
   {
+    path: 'triangle',
+    name: 'triangle',
+    component: () => import('@/views/echarts/Components/triangle.vue'),
+    meta: {
+      title: '三角柱形图',
+      permission: 'echarts.triangle',
+    },
+  },
+  {
+    path: 'dynamicPie',
+    name: 'dynamicPie',
+    component: () => import('@/views/echarts/Components/dynamicPie.vue'),
+    meta: {
+      title: '动态饼图',
+      permission: 'echarts.dynamicPie',
+    },
+  },
+  {
+    path: 'waterPolo',
+    name: 'waterPolo',
+    component: () => import('@/views/echarts/Components/waterPolo.vue'),
+    meta: {
+      title: '3d水球图',
+      permission: 'echarts.waterPolo',
+    },
+  },
+  {
+    path: 'twoColumnChart',
+    name: 'twoColumnChart',
+    component: () => import('@/views/echarts/Components/twoColumnChart.vue'),
+    meta: {
+      title: '双柱形图',
+      permission: 'echarts.twoColumnChart',
+    },
+  },
+  {
     path: 'map',
     name: 'map',
     component: () => import('@/views/echarts/Components/map.vue'),
