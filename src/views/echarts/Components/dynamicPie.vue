@@ -536,33 +536,33 @@ export default {
         //记录索引
         this.nEchartsHoverIndex = e.dataIndex;
         //高亮Hover元素，排他
-        for (let i = 0; i <= 10; i++) {
-          if (i == e.dataIndex) {
-            this.oEchartsInstanceObject.dispatchAction({
-              type: "highlight",
-              seriesIndex: 0,
-              dataIndex: i,
-            });
-          } else {
-            this.oEchartsInstanceObject.dispatchAction({
-              type: "downplay",
-              seriesIndex: 0,
-              dataIndex: i,
-            });
-          }
-        }
+        this.hoverEcharts(e.dataIndex)
       });
     },
     //文字hoverEcharts
     setEchartsHover(e) {
       // console.log(e);
-      this.oEchartsInstanceObject.dispatchAction({
-        type: "highlight",
-        seriesIndex: 0,
-        dataIndex: e,
-      });
       //记录索引
       this.nEchartsHoverIndex = e;
+      this.hoverEcharts(e)
+    },
+    //高亮Hover元素，排他
+    hoverEcharts(e) {
+      for (let i = 0; i < this.aEchartsData.length; i++) {
+        if (i == e) {
+          this.oEchartsInstanceObject.dispatchAction({
+            type: "highlight",
+            seriesIndex: 0,
+            dataIndex: i,
+          });
+        } else {
+          this.oEchartsInstanceObject.dispatchAction({
+            type: "downplay",
+            seriesIndex: 0,
+            dataIndex: i,
+          });
+        }
+      }
     },
   }
 }
