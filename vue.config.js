@@ -1,6 +1,5 @@
 const { defineConfig } = require('@vue/cli-service');
 const CompressionPlugin = require('compression-webpack-plugin');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -24,8 +23,7 @@ function getConfigPlugins() {
       })
     );
   }
-  //按需加载polyfill补足旧版本浏览器中缺失的 ECMAScript 新特性
-  plugins.push(new NodePolyfillPlugin());
+
   return plugins;
 }
 //添加生成环境和开发环境需要的optimization.minimizer
