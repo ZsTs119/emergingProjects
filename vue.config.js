@@ -116,10 +116,6 @@ module.exports = defineConfig({
     optimization: {
       //移除项目中未使用的代码。
       usedExports: true,
-      //分割chunk-vendors包
-      splitChunks: {
-        chunks: 'all'
-      },
       //替代 webpack 默认的 uglifyjs-webpack-plugin
       minimize: true,
       minimizer: getConfigOptimizationMinimizer(),
@@ -129,7 +125,9 @@ module.exports = defineConfig({
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            chunks: 'all'
+            chunks: 'all',
+            //至少2个chunk中使用的node_modules内容
+            minChunks: 2
           }
         }
       },
