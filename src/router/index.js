@@ -7,6 +7,14 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/home',
+    name: 'HOME',
+    component: () => import('@/views/home/index.vue'),
+    meta: {
+      title: 'HOME',
+    },
+  },
+  {
     path: '/js',
     name: 'JavaScript',
     component: () => import('@/views/js/index.vue'),
@@ -50,7 +58,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 默认重定向js页面
   if (to.path == '/') {
-    next({ name: 'Echarts' })
+    next({ name: 'HOME' })
   } else {
     next();
   }

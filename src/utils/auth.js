@@ -12,6 +12,6 @@ export function GET_ISLOGON(params) {
 export function REMOVE_ISLOGON(params) {
   return localStorage.removeItem(ISLOGON, params);
 }
-export function REDIRECT_ROUTER(REDIRECT_ROUTER) {
-  return
+export function REDIRECT_ROUTER(params) { 
+  
 }
