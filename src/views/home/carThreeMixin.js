@@ -26,6 +26,7 @@ export default {
         carAnimationBool: false
       },
       CarObject: {
+        isLoading: true,
         //当前汽车模型
         mesh: null,
         // 用于动画的混合器
@@ -126,7 +127,7 @@ export default {
       this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
       this.renderer.toneMappingExposure = 1;
       //将渲染器的渲染结果画布，添加到body中
-      this.$refs['car-three'].appendChild(this.renderer.domElement);
+      this.$refs['three-car'].appendChild(this.renderer.domElement);
     },
     //控制器方法
     setControls() {
@@ -607,6 +608,8 @@ export default {
     },
     //返回汽车模型
     async getCarMesh() {
+      //创建防抖
+      let carSetTimeOut = null
       //创建GLTF加载器
       const loader = new GLTFLoader();
       //创建一个组
@@ -627,9 +630,14 @@ export default {
         //将gltf里的scene添加到组里
         this.carGroup.add(gltf.scene);
       },
+
         // 进度回调函数
-        function (xhr) {
-          // console.log(xhr, (Math.floor(xhr.loaded / xhr.total * 100)) + '% loaded');
+        (xhr) => {
+          clearTimeout(carSetTimeOut)
+          carSetTimeOut = setTimeout(() => {
+            console.log(xhr, '加载完成');
+            this.CarObject.isLoading = false
+          }, 1000);
         },
         // 错误回调函数
         (error) => {

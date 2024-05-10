@@ -16,7 +16,7 @@ input[type="color"]::-webkit-color-swatch {
 
 
 
-#colorPicker {
+#color-picker {
   cursor: pointer;
   display: block;
   position: fixed;
@@ -29,7 +29,7 @@ input[type="color"]::-webkit-color-swatch {
   z-index: 2;
 }
 
-#insideCar {
+#inside-car {
   cursor: pointer;
   position: fixed;
   right: 5%;
@@ -48,7 +48,7 @@ input[type="color"]::-webkit-color-swatch {
   box-sizing: border-box;
 }
 
-#outsideCar {
+#outside-car {
   cursor: pointer;
   position: fixed;
   right: 5%;
@@ -67,7 +67,7 @@ input[type="color"]::-webkit-color-swatch {
   box-sizing: border-box;
 }
 
-#allAniCar {
+#all-aniCar {
   cursor: pointer;
   position: fixed;
   right: 5%;
@@ -86,24 +86,35 @@ input[type="color"]::-webkit-color-swatch {
   box-sizing: border-box;
 }
 
-#car-three {
+#three-car {
   width: 100vw;
   height: 100vh;
 }
 </style>
 <template>
   <div>
-    <input id="colorPicker" ref="colorPicker" type="color" value="#679d5d" />
-    <div id="insideCar" ref="insideCar">车内</div>
-    <div id="outsideCar" ref="outsideCar">车外</div>
-    <div id="allAniCar" ref="allAniCar">展开</div>
-    <div id="car-three" ref="car-three"></div>
+    <div v-if="isLoading">
+      <loading />
+    </div>
+    <div v-show="!isLoading">
+      <input id="color-picker" ref="colorPicker" type="color" value="#679d5d" />
+      <div id="inside-car" ref="insideCar">车内</div>
+      <div id="outside-car" ref="outsideCar">车外</div>
+      <div id="all-aniCar" ref="allAniCar">展开</div>
+      <div id="three-car" ref="three-car"></div>
+    </div>
+
+
   </div>
 </template>
 
 <script>
+import loading from "@/views/components/loading/index.vue"
 import carThreeMixin from './carThreeMixin'
 export default {
+  components: {
+    loading
+  },
   //混入car
   mixins: [carThreeMixin],
   name: "home",
@@ -116,7 +127,9 @@ export default {
 
   },
   computed: {
-
+    isLoading() {
+      return this.CarObject.isLoading
+    }
   },
   created() {
 
@@ -126,6 +139,7 @@ export default {
   mounted() {
     //初始化carThree
     this.initData()
+    console.log('CarObject', this.CarObject.isLoading)
   },
   methods: {}
 }
