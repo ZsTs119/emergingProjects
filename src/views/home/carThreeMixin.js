@@ -38,7 +38,7 @@ export default {
         //存放5个轨道动画的精灵标签
         carSpriteObject: {},
         //环境贴图路径
-        cubeTextureUrl: "../threeCar/汽车贴图9/",
+        cubeTextureUrl: "../threeCar/白天/",
         //环境贴图6个面
         cubeTextureloadArray: [
           'nx.png',
@@ -100,11 +100,11 @@ export default {
     setCamera() {
       //设置相机的位置
       this.camera.position.set(
-        1.067,
-        24.488,
-        -716.064);
+        6.728,
+        -50.384,
+        -477.321);
       //设置相机的焦点为mesh场景
-      this.camera.lookAt(0, 0, 0);
+      this.camera.lookAt(6.020, -66.629, -2.269);
     },
     //渲染器方法
     setRenderer() {
@@ -136,10 +136,15 @@ export default {
       this.controls.enablePan = false
       this.controls.maxPolarAngle = Math.PI / 2
       this.controls.minPolarAngle = Math.PI / 2 - 10
+      this.controls.target.set(6.020, -66.629, -2.269)
+      // 启用阻尼（惯性）效果
+      this.controls.enableDamping = true;
+      // 配置阻尼系数，根据需要调整值
+      this.controls.dampingFactor = 0.05;
       //如果OrbitControls改变了相机参数,重新调用渲染器渲染三维场景
       this.controls.addEventListener("change", () => {
-        // console.log('camera', camera.position)
-        // console.log('controls', controls.target)
+        // console.log('camera', this.camera.position)
+        // console.log('controls', this.controls.target)
       })
     },
     // 回调函数更新动画
@@ -156,6 +161,8 @@ export default {
         this.CarObject.carAnimations.forEach(mixer => mixer.update(0.012));
       }
       this.renderer.render(this.scene, this.camera);
+      // 更新控制器以支持阻尼效果
+      this.controls.update();
       TWEEN.update()
       requestAnimationFrame(this.render);
     },
@@ -187,7 +194,7 @@ export default {
         .easing(TWEEN.Easing.Quadratic.Out);
       // 相机移动时，焦点始终为模型的位置
       cameraAct.onUpdate(() => {
-        this.camera.lookAt(0, 0, 0)
+        this.camera.lookAt(6.020, -66.629, -2.269)
       })
       cameraAct.start()
     },
@@ -213,17 +220,17 @@ export default {
       }, false)
       outsideCar.addEventListener('click', (event) => {
         // console.log('我是outsideCar')
-        this.controls.target.set(0, 0, 0)
+        this.controls.target.set(6.020, -66.629, -2.269)
         const cameraAct = new TWEEN.Tween(this.camera.position)
           .to({
-            x: 711.813,
-            y: 81.640,
-            z: -2.589
+            x: 6.728,
+            y: - 50.384,
+            z: -477.321
           }, 2000)
           .easing(TWEEN.Easing.Quadratic.Out);
         // 相机移动时，焦点始终为模型的位置
         cameraAct.onUpdate(() => {
-          this.camera.lookAt(0, 0, 0)
+          this.camera.lookAt(6.020, -66.629, -2.269)
         })
         cameraAct.start()
       }, false)
@@ -347,7 +354,7 @@ export default {
       const geometryMeshTop = new THREE.Mesh(geometryTop, materialTop);
       geometryMeshTop.rotateX(-Math.PI / 2)
       geometryMeshTop.receiveShadow = true;
-      geometryMeshTop.position.y = 200
+      geometryMeshTop.position.y = 100
 
       //创建地板平面
       // 加载木板纹理
@@ -382,16 +389,16 @@ export default {
     setCarMaterials(gltf, cubeTextureLoader) {
       //基础材质
       const baseMaterialConfig = {
-        // envMap: cubeTextureLoader,
+        envMap: cubeTextureLoader,
         metalness: 1,
         roughness: 0.35,
       };
       //玻璃材质及除（外壳，高光金属以外的mesh）
       const glassMaterial = new THREE.MeshPhysicalMaterial({
         //设置立方体环境贴图
-        // envMap: cubeTextureLoader,
+        envMap: cubeTextureLoader,
         //设置环境贴图对mesh表面的影响
-        // envMapIntensity: 1.0,
+        envMapIntensity: 1.0,
         //设置金属度
         metalness: 0,
         //设置粗糙度
@@ -404,8 +411,8 @@ export default {
       //外壳材质
       const shellMaterial = new THREE.MeshPhysicalMaterial({
         color: gltf.scene.getObjectByName('外壳01').material.color,
-        // envMap: cubeTextureLoader,
-        // envMapIntensity: 2.0,
+        envMap: cubeTextureLoader,
+        envMapIntensity: 1.0,
         metalness: 0.9,
         roughness: 0.5,
         clearcoat: 1.0,
@@ -414,9 +421,9 @@ export default {
       //高光金属材质
       const highlightMetalMaterial = new THREE.MeshPhysicalMaterial({
         //设置立方体环境贴图
-        // envMap: cubeTextureLoader,
+        envMap: cubeTextureLoader,
         //设置环境贴图对mesh表面的影响
-        // envMapIntensity: 1.0,
+        envMapIntensity: 1.0,
         //设置金属度
         metalness: 1,
         //设置粗糙度

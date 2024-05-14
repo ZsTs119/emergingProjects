@@ -139,7 +139,7 @@ export default {
   mounted() {
     //初始化carThree
     this.initData()
-    console.log('CarObject', this.CarObject.isLoading)
+    // console.log('CarObject', this.CarObject.isLoading)
   },
   methods: {}
 }

@@ -354,12 +354,11 @@ export default {
 
   },
   created() {
-
   },
   computed: {
     sAniName() {
       let num = Math.floor(Math.random() * (7 - 0 + 1)) + 0;
-      console.log('当前数',num)
+      // console.log('当前数',num)
       return 'ani' + num
     }
   },
